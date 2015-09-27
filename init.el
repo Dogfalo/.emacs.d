@@ -130,3 +130,72 @@
 ;; Langauage-specific
 (load "setup-clojure.el")
 (load "setup-js.el")
+
+
+
+
+;; Window Size
+(add-to-list 'default-frame-alist '(height . 45))
+(add-to-list 'default-frame-alist '(width . 130))
+
+
+;; Font
+(set-face-attribute 'default nil :font  "Inconsolata" )
+(set-face-attribute 'default t :font  "Inconsolata" )
+ (set-face-attribute 'default nil :height 140)
+
+
+;; Scroll one line
+(setq scroll-conservatively most-positive-fixnum)
+(setq scroll-margin 3)
+
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+;; Emmet
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+(setq emmet-move-cursor-between-quotes t) ;; default 
+
+
+;; Multiple Cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; Powerline 2.0
+(require 'powerline)
+(powerline-default-theme)
+
+;; NeoTree
+(add-to-list 'load-path "~/.emacs.d/neotree")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+;; FlyCheck
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; Company Mode
+(setq company-idle-delay 0)
+
+;; Emmet
+(global-set-key (kbd "TAB") 'emmet-expand-line)
+
+;; Projectile
+(setq projectile-indexing-method 'native)
+(setq projectile-enable-caching t)
+(global-set-key (kbd "C-c f") 'projectile-find-file)
+
+;; Nyan Mode
+(require 'nyan-mode)
+(nyan-mode 1)
