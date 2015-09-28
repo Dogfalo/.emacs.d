@@ -142,7 +142,7 @@
 ;; Font
 (set-face-attribute 'default nil :font  "Inconsolata" )
 (set-face-attribute 'default t :font  "Inconsolata" )
- (set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 130)
 
 
 ;; Scroll one line
@@ -189,7 +189,7 @@
 (setq company-idle-delay 0)
 
 ;; Emmet
-(global-set-key (kbd "TAB") 'emmet-expand-line)
+(global-set-key (kbd "C-<tab>") 'emmet-expand-line)
 
 ;; Projectile
 (setq projectile-indexing-method 'native)
@@ -199,3 +199,18 @@
 ;; Nyan Mode
 (require 'nyan-mode)
 (nyan-mode 1)
+
+;; Expand Region
+(global-set-key (kbd "C-x C-b") 'er/expand-region)
+
+;; Guide Key
+(require 'guide-key)
+(setq guide-key/guide-key-sequence '("C-x" "C-c"))
+(guide-key-mode 1)  ; Enable guide-key-mode
+
+;; Tabs use Spaces
+(setq-default indent-tabs-mode nil)
+
+;; Fuzzy
+(require 'auto-complete-config)
+(ac-config-default)
