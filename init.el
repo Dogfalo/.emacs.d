@@ -136,7 +136,7 @@
 
 ;; Window Size
 (add-to-list 'default-frame-alist '(height . 45))
-(add-to-list 'default-frame-alist '(width . 130))
+(add-to-list 'default-frame-alist '(width . 135))
 
 
 ;; Font
@@ -214,3 +214,20 @@
 ;; Fuzzy
 (require 'auto-complete-config)
 (ac-config-default)
+
+;; Emacs Theme
+(load-theme 'seti t)
+
+;; Unindent by 2 Spaces(global-set-key (kbd "<S-tab>") 'un-indent-by-removing-4-spaces)
+(global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
+(defun un-indent-by-removing-4-spaces ()
+  "remove 4 spaces from beginning of of line"
+  (interactive)
+  (save-excursion
+    (save-match-data
+      (beginning-of-line)
+      ;; get rid of tabs at beginning of line
+      (when (looking-at "^\\s-+")
+        (untabify (match-beginning 0) (match-end 0)))
+      (when (looking-at "^  ")
+        (replace-match "")))))
