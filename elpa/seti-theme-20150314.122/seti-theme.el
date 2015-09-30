@@ -62,7 +62,7 @@
    `(default ((t (:background ,background :foreground ,text))))
    `(cursor ((t (:background ,input-text :foreground ,background))))
    `(highlight ((t (:background ,text-highlight))))
-   `(minibuffer-prompt ((t (:foreground ,dark-blue :weight bold))))
+   `(minibuffer-prompt ((t (:foreground ,dark-blue))))
    `(region ((t (:background ,text-region))))
    `(error ((t (:foreground ,red :weight bold :underline (:color ,red :style line)))))
  
