@@ -92,7 +92,7 @@
 ;;
 ;; (require 'yaml-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-;; 
+;;
 ;; Adding this code will make Emacs enter yaml mode whenever you open
 ;; a .yml file
 (add-to-list 'load-path "~/.emacs.d/vendor")
@@ -142,12 +142,12 @@
 ;; Font
 (set-face-attribute 'default nil :font  "Inconsolata" )
 (set-face-attribute 'default t :font  "Inconsolata" )
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 150)
 
 
 ;; Scroll one line
 (setq scroll-conservatively most-positive-fixnum)
-(setq scroll-margin 3)
+(setq scroll-margin 10)
 
 (require 'flx-ido)
 (ido-mode 1)
@@ -162,7 +162,7 @@
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
-(setq emmet-move-cursor-between-quotes t) ;; default 
+(setq emmet-move-cursor-between-quotes t) ;; default
 
 
 ;; Multiple Cursors
@@ -177,7 +177,7 @@
 (powerline-default-theme)
 
 ;; NeoTree
-(add-to-list 'load-path "~/.emacs.d/neotree")
+;; (add-to-list 'load-path "~/.emacs.d/neotree")
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
@@ -189,7 +189,7 @@
 (setq company-idle-delay 0)
 
 ;; Emmet
-(global-set-key (kbd "C-<tab>") 'emmet-expand-line)
+(global-set-key [C-tab] 'emmet-expand-line)
 
 ;; Projectile
 (setq projectile-indexing-method 'native)
@@ -199,6 +199,8 @@
 ;; Nyan Mode
 (require 'nyan-mode)
 (nyan-mode 1)
+(setq nyan-wavy-trail t)
+(nyan-start-animation)
 
 ;; Expand Region
 (global-set-key (kbd "C-x C-b") 'er/expand-region)
@@ -214,6 +216,8 @@
 ;; Fuzzy
 (require 'auto-complete-config)
 (ac-config-default)
+(define-key ac-completing-map "\t" nil)
+(define-key ac-completing-map [tab] nil)
 
 ;; Emacs Theme
 (load-theme 'seti t)
@@ -231,3 +235,37 @@
         (untabify (match-beginning 0) (match-end 0)))
       (when (looking-at "^  ")
         (replace-match "")))))
+
+(setq default-tab-width 2)
+(global-auto-revert-mode t)
+(setq css-indent-offset 2)
+(add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
+;; Highlight current line
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#4A5BBA")
+(set-face-foreground 'highlight nil)
+
+
+;; Highlight 80 column
+(require 'fill-column-indicator)
+(fci-mode 1)
+;; (setq fci-rule-width 1)
+(setq-default fill-column 80)
+  (define-globalized-minor-mode global-fci-mode fci-mode
+    (lambda ()
+      (if (and
+           (not (string-match "^\*.*\*$" (buffer-name)))
+           (not (eq major-mode 'dired-mode)))
+          (fci-mode 1))))
+  (global-fci-mode 1)
+
+
+;; Delete selection on type
+(delete-selection-mode 1)
+
+;; Yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(global-set-key (kbd "\t") 'yas-expand)
